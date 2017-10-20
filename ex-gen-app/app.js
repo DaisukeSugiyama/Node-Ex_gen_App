@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+/*セッション利用*/
+var session = require('express-session');
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -22,6 +25,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//session セッション
+var session_opt = {
+    secret: 'keybord cat',
+    resave: false,
+    saveUninitialized: false,
+    cokkie: { maxAge: 60 * 60 * 1000 }
+};
+app.use(session(session_opt));
+
 
 app.use('/', index);
 app.use('/users', users);
@@ -45,5 +58,8 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+
+
 
 module.exports = app;

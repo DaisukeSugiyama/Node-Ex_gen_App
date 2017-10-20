@@ -3,19 +3,25 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
+    var msg = '※入力してください';
+    if (req.session.message != undefined) {
+        msg = "Last Message : " + req.session.message
+    }
     var data = {
         title: 'Hello',
-        content: '※入力してください'
+        content: msg
     };
     res.render('hello', data);
 });
 
 router.post('/post', (req, res, next) => {
     console.log(req);
+
     var msg = req.body['message'];
+    req.session.message = msg;
     var data = {
         title: 'Hello!',
-        content: 'あなたは、「'　 + msg + '」と入力しました'
+        content: 'Last Message : '　 + req.session.message
     };
     res.render('hello', data);
 });
