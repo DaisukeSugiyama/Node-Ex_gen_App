@@ -6,11 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 /*セッション利用*/
 var session = require('express-session');
-
+/*jquery*/
+//var jquery = require('express-jquery');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var hello = require('./routes/hello');
+var news = require('./routes/news');
+var ajax = require('./routes/ajax');
 
 var app = express();
 
@@ -26,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 //session セッション
 var session_opt = {
     secret: 'keybord cat',
@@ -35,11 +39,14 @@ var session_opt = {
 };
 app.use(session(session_opt));
 
+/*jquery*/
+//app.use(jquery('/jquery'));
 
 app.use('/', index);
 app.use('/users', users);
 app.use('/hello', hello);
-
+app.use('/news', news);
+app.use('/ajax', ajax);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
