@@ -14,6 +14,7 @@ var users = require('./routes/users');
 var hello = require('./routes/hello');
 var news = require('./routes/news');
 var ajax = require('./routes/ajax');
+var sqlitedb = require('./routes/sqlitedb');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use('/users', users);
 app.use('/hello', hello);
 app.use('/news', news);
 app.use('/ajax', ajax);
+app.use('/sqlitedb', sqlitedb);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
