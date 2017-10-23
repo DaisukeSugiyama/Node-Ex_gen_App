@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/jquery.min.js"></script>
+  </head>
+  <body>
+<head>
+    <h1><%= title %></h1>
+ </head>
+ <div role="main">
+    <p><%= content %></p>
+    <form method="post" action="/crud/add">
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="name"></td>
+            </tr>
+             <tr>
+                <th>Mail</th>
+                <td><input type="text" name="mail"></td>
+            </tr>
+             <tr>
+                <th>Age</th>
+                <td><input type="text" name="age"></td>
+            </tr>
+             <tr>
+                <th></th>
+                <td><input type="submit" value="作成"></td>
+            </tr>
+        </table>
+    </form>
+ </div>
+  </body>
+</html>
