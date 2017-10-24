@@ -26,7 +26,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/add', (req, res, next) => {
     var data = {
-        title: 'Hello/Add',
+        title: 'Crud/Add',
         content: '新しいレコードを入力'
     }
     res.render('crud/add', data);
