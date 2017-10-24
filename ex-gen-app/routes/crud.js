@@ -40,4 +40,22 @@ router.post('/add', (req, res, next) => {
     res.redirect('/crud');
 })
 
+/*show*/
+router.get('/show', (req, res, next) => {
+    var id = req.query.id;
+    db.serialize(() => {
+        var q = "select * from mydata where id =?";
+        db.get(q, [id], (err, row) => {
+            if (!err) {
+                var data = {
+                    title: 'Crud/show',
+                    content: 'id = ' + id + ' のレコード',
+                    mydata: row
+                }
+                res.render('crud/show', data);
+            }
+        })
+    });
+})
+
 module.exports = router;
