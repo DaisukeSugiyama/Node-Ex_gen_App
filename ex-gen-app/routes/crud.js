@@ -58,4 +58,57 @@ router.get('/show', (req, res, next) => {
     });
 })
 
+/*edit*/
+router.get('/edit', (req, res, next) => {
+    var id = req.query.id;
+    db.serialize(() => {
+        var q = "select * from mydata where id = ?";
+        db.get(q, [id], (err, row) => {
+            if (!err) {
+                var data = {
+                    title: 'crud/edit',
+                    content: 'id = ' + id + 'のレコードを編集 : ',
+                    mydata: row
+                }
+                res.render('crud/edit', data);
+            }
+        });
+    });
+});
+
+router.post('/edit', (req, res, next) => {
+    var id = req.body.id;
+    var name = req.body.name;
+    var mail = req.body.mail;
+    var age = req.body.age;
+    var q = "update mydata set name = ?,mail = ?,age = ? where id = ?";
+    db.run(q, name, mail, age, id);
+    res.redirect('/crud');
+});
+
+/*delete*/
+router.get('/delete', (req, res, next) => {
+    var id = req.query.id;
+    db.serialize(() => {
+        var q = "select * from mydata where id = ?";
+        db.get(q, [id], (err, row) => {
+            if (!err) {
+                var data = {
+                    title: "crud/delete",
+                    content: 'id = ' + id + 'のレコードを削除 : ',
+                    mydata: row
+                }
+                res.render('crud/delete', data);
+            }
+        });
+    });
+});
+
+router.post('/delete', (req, res, next) => {
+    var id = req.body.id;
+    var q = "delete from mydata where id = ?";
+    db.run(q, id);
+    res.redirect('/crud');
+})
+
 module.exports = router;
