@@ -1,0 +1,8 @@
+#vscodeの設定
+/.vscode/
+
+#sqlite
+*.sqlite3
+
+#
+npm-debug.log
